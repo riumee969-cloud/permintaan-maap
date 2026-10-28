@@ -58,7 +58,7 @@ header p {
   margin: 20px 0;
   border-radius: 25px;
   box-shadow: 0 10px 30px #c64d7e18;
-  border: 1px solid #ffffff;
+  border: 1px solid white;
 }
 
 h2 {
@@ -127,59 +127,96 @@ button:hover, .upload-btn:hover {
   animation: beat 1s infinite;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-.photo-box {
-  background: #fff4f8;
-  border: 2px dashed #f5a7c4;
-  border-radius: 20px;
-  min-height: 190px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.photo-box img {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-  display: none;
-}
-
-.photo-placeholder {
+.gallery-heading {
   text-align: center;
-  padding: 15px;
-  color: #c66d91;
+  color: #8b4161;
   line-height: 1.8;
 }
 
-.photo-placeholder span {
-  display: block;
-  font-size: 35px;
+.gallery-heading h2 {
+  font-size: 24px;
 }
 
-input[type="file"] {
+.foto-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 22px auto;
+}
+
+.foto-card {
+  background: white;
+  padding: 10px;
+  width: min(44%, 230px);
+  min-width: 0;
+  margin: 0;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px #e7a9c355;
+  transform: rotate(-2deg);
+  transition: transform .3s;
+  overflow: hidden;
+}
+
+.foto-card:nth-child(2) {
+  transform: rotate(2deg);
+}
+
+.foto-card:hover {
+  transform: rotate(0) translateY(-5px);
+}
+
+.foto-card img {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+}
+
+.foto-card figcaption {
+  padding: 12px 2px 5px;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+
+.photo-error {
+  display: none;
+  min-height: 180px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  color: #c66d91;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.pesan-foto {
+  line-height: 1.8;
+  max-width: 450px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.upload-area {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.upload-area input {
   display: none;
 }
 
-.uploads {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.small {
-  color: #a77a8e;
+.upload-note {
   font-size: 12px;
+  color: #a77a8e;
   line-height: 1.7;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 footer {
@@ -187,6 +224,7 @@ footer {
   padding: 20px 5px;
   font-size: 13px;
   color: #bc7292;
+  line-height: 1.8;
 }
 
 .floating-heart {
@@ -220,18 +258,56 @@ footer {
 }
 
 @media (max-width: 500px) {
-  .container { padding-top: 15px; }
-  .card { padding: 19px; }
-  .gallery { grid-template-columns: 1fr; }
-  .photo-box img { height: 300px; }
-  .buttons button { width: 100%; }
-  .uploads { grid-template-columns: 1fr; }
+  .container {
+    padding-top: 15px;
+  }
+
+  .card {
+    padding: 19px;
+  }
+
+  .foto-container {
+    gap: 12px;
+  }
+
+  .foto-card {
+    width: 46%;
+  }
+
+  .foto-card img {
+    height: 220px;
+  }
+
+  .buttons button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 340px) {
+  .foto-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .foto-card {
+    width: 90%;
+  }
+
+  .foto-card img {
+    height: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
   <header>
@@ -266,11 +342,12 @@ Maafin AII yaa, Ikayy? 🥹💗</div>
     </div>
 
     <div class="buttons">
-      <button onclick="kejutan()">
+      <button type="button" onclick="kejutan()">
         Buka kejutan 🎁
       </button>
 
-      <button class="secondary" onclick="hati(20)">
+      <button type="button" class="secondary"
+        onclick="hati(20)">
         Kirim hati buat Ikayy 💕
       </button>
     </div>
@@ -284,6 +361,7 @@ Maafin AII yaa, Ikayy? 🥹💗</div>
         jadi seseorang yang lebih bisa menjaga perasaanmu.
 
         <br><br>
+
         Aku nggak minta kamu langsung maafin aku.
         Aku cuma pengin punya kesempatan buat buktiin
         kalau aku serius memperbaiki diri.
@@ -300,110 +378,72 @@ Maafin AII yaa, Ikayy? 🥹💗</div>
       Biar makin gemes, aku masukin foto favorit aku di sini yaa!
     </p>
 
-  
-<section class="galeri-ikayy">
-  <h2>Foto Cantik Kesayangan AII 💗</h2>
-  <p>Jangan ngambek terus yaa, cantik 🥺💕</p>
+    <div class="gallery-heading">
+      <h2>Foto Cantik Kesayangan AII 💗</h2>
+      <p>Jangan ngambek terus yaa, cantik 🥺💕</p>
+    </div>
 
-  <div class="foto-container">
-    <figure class="foto-card">
-      <img
-        src="foto-ikayy%20(1).png"
-        alt="Selfie Ikayy"
-      />
-      <figcaption>My pretty girl 🌷</figcaption>
-    </figure>
+    <div class="foto-container">
 
-    <figure class="foto-card">
-      <img
-        src="foto-ikayy%20(1).jpg"
-        alt="Foto Ikayy"
-      />
-      <figcaption>Kesayangan AII 💖</figcaption>
-    </figure>
-  </div>
+      <figure class="foto-card">
+        <img
+          id="foto1"
+          src="./foto%20ikayy%20(1).png"
+          alt="Selfie Ikayy"
+          onerror="fotoGagal('foto1','error1')"
+        >
+        <div class="photo-error" id="error1">
+          🥺 Foto belum bisa dimuat.
+          <br>Periksa nama file di GitHub.
+        </div>
+        <figcaption>My pretty girl 🌷</figcaption>
+      </figure>
 
-  <p class="pesan-foto">
-    Mau kamu lagi marah atau lagi senyum,
-    kamu tetap seseorang yang spesial buat aku. 🫶
-  </p>
-</section>
+      <figure class="foto-card">
+        <img
+          id="foto2"
+          src="./foto%20ikayy%20(1).JPG"
+          alt="Foto Ikayy"
+          onerror="fotoGagal('foto2','error2')"
+        >
+        <div class="photo-error" id="error2">
+          🥺 Foto belum bisa dimuat.
+          <br>Periksa nama file di GitHub.
+        </div>
+        <figcaption>Kesayangan AII 💖</figcaption>
+      </figure>
 
-<style>
-.galeri-ikayy {
-  text-align: center;
-  padding: 24px 12px;
-  color: #8b4161;
-}
+    </div>
 
-.galeri-ikayy h2 {
-  font-size: 24px;
-}
+    <p class="pesan-foto">
+      Mau kamu lagi marah atau lagi senyum,
+      kamu tetap seseorang yang spesial buat aku. 🫶
+    </p>
 
-.foto-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin: 22px auto;
-}
+    <div class="upload-area">
+      <p style="margin-bottom:12px">
+        Mau mengganti foto? Pilih foto dari perangkatmu 💗
+      </p>
 
-.foto-card {
-  background: white;
-  padding: 10px;
-  width: min(44%, 230px);
-  margin: 0;
-  border-radius: 18px;
-  box-shadow: 0 6px 20px #e7a9c355;
-  transform: rotate(-2deg);
-  transition: transform 0.3s;
-}
+      <div class="buttons" style="justify-content:center">
+        <label class="upload-btn" for="gantiFoto1">
+          Ganti foto pertama 📸
+        </label>
 
-.foto-card:nth-child(2) {
-  transform: rotate(2deg);
-}
+        <label class="upload-btn secondary" for="gantiFoto2">
+          Ganti foto kedua 🌷
+        </label>
+      </div>
 
-.foto-card:hover {
-  transform: rotate(0) translateY(-5px);
-}
+      <input type="file" id="gantiFoto1" accept="image/*">
+      <input type="file" id="gantiFoto2" accept="image/*">
 
-.foto-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 12px;
-  display: block;
-}
-
-.foto-card figcaption {
-  padding: 12px 2px 5px;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.pesan-foto {
-  line-height: 1.8;
-  max-width: 450px;
-  margin: 20px auto;
-}
-
-@media (max-width: 380px) {
-  .foto-container {
-    gap: 10px;
-  }
-
-  .foto-card {
-    width: 46%;
-  }
-
-  .foto-card img {
-    height: 190px;
-  }
-}
-</style>
-
+      <p class="upload-note">
+        Foto pilihanmu hanya ditampilkan di browser perangkat ini.
+        Untuk mengganti foto permanen di website, unggah file ke GitHub.
+      </p>
+    </div>
+  </section>
 
   <footer>
     Dibuat dengan penuh rasa sayang oleh AII untuk Ikayy 🌷
@@ -418,9 +458,9 @@ function kejutan() {
   const surprise = document.getElementById("surprise");
   surprise.classList.toggle("show");
 
-  hati(30);
-
   if (surprise.classList.contains("show")) {
+    hati(30);
+
     setTimeout(() => {
       surprise.scrollIntoView({
         behavior: "smooth",
@@ -440,8 +480,11 @@ function hati(jumlah = 15) {
       emoji[Math.floor(Math.random() * emoji.length)];
 
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (18 + Math.random() * 20) + "px";
-    heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+    heart.style.fontSize =
+      (18 + Math.random() * 20) + "px";
+
+    heart.style.animationDuration =
+      (3 + Math.random() * 2) + "s";
 
     document.body.appendChild(heart);
 
@@ -449,7 +492,15 @@ function hati(jumlah = 15) {
   }
 }
 
-function setupUpload(inputId, imgId, placeholderId) {
+function fotoGagal(imgId, errorId) {
+  const img = document.getElementById(imgId);
+  const error = document.getElementById(errorId);
+
+  img.style.display = "none";
+  error.style.display = "flex";
+}
+
+function pasangUpload(inputId, imgId, errorId) {
   const input = document.getElementById(inputId);
 
   input.addEventListener("change", function() {
@@ -459,6 +510,7 @@ function setupUpload(inputId, imgId, placeholderId) {
 
     if (!file.type.startsWith("image/")) {
       alert("Pilih file gambar yaa 💗");
+      this.value = "";
       return;
     }
 
@@ -466,21 +518,24 @@ function setupUpload(inputId, imgId, placeholderId) {
 
     reader.onload = function(event) {
       const img = document.getElementById(imgId);
+      const error = document.getElementById(errorId);
 
       img.src = event.target.result;
       img.style.display = "block";
+      error.style.display = "none";
+    };
 
-      document.getElementById(placeholderId).style.display = "none";
+    reader.onerror = function() {
+      alert("Foto gagal dibaca. Coba pilih foto lain yaa.");
     };
 
     reader.readAsDataURL(file);
   });
 }
 
-setupUpload("file1", "img1", "placeholder1");
-setupUpload("file2", "img2", "placeholder2");
+pasangUpload("gantiFoto1", "foto1", "error1");
+pasangUpload("gantiFoto2", "foto2", "error2");
 
-// Hati kecil muncul saat halaman dibuka.
 window.addEventListener("load", () => {
   setTimeout(() => hati(8), 500);
 });
