@@ -1,0 +1,103 @@
+
+<section class="galeri-ikayy">
+  <h2>Foto Cantik Kesayangan AII 💗</h2>
+  <p>Jangan ngambek terus yaa, cantik 🥺💕</p>
+
+  <div class="foto-container">
+    <figure class="foto-card">
+      <img
+        src="foto-ikayy-1.png"
+        alt="Selfie Ikayy"
+      />
+      <figcaption>My pretty girl 🌷</figcaption>
+    </figure>
+
+    <figure class="foto-card">
+      <img
+        src="foto-ikayy-2.jpg"
+        alt="Foto Ikayy"
+      />
+      <figcaption>Kesayangan AII 💖</figcaption>
+    </figure>
+  </div>
+
+  <p class="pesan-foto">
+    Mau kamu lagi marah atau lagi senyum,
+    kamu tetap seseorang yang spesial buat aku. 🫶
+  </p>
+</section>
+
+<style>
+.galeri-ikayy {
+  text-align: center;
+  padding: 24px 12px;
+  color: #8b4161;
+}
+
+.galeri-ikayy h2 {
+  font-size: 24px;
+}
+
+.foto-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 22px auto;
+}
+
+.foto-card {
+  background: white;
+  padding: 10px;
+  width: min(44%, 230px);
+  margin: 0;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px #e7a9c355;
+  transform: rotate(-2deg);
+  transition: transform 0.3s;
+}
+
+.foto-card:nth-child(2) {
+  transform: rotate(2deg);
+}
+
+.foto-card:hover {
+  transform: rotate(0) translateY(-5px);
+}
+
+.foto-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+  display: block;
+}
+
+.foto-card figcaption {
+  padding: 12px 2px 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.pesan-foto {
+  line-height: 1.8;
+  max-width: 450px;
+  margin: 20px auto;
+}
+
+@media (max-width: 380px) {
+  .foto-container {
+    gap: 10px;
+  }
+
+  .foto-card {
+    width: 46%;
+  }
+
+  .foto-card img {
+    height: 190px;
+  }
+}
+</style>
